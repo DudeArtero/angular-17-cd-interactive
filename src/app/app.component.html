@@ -1,11 +1,12 @@
-@for (component of appComponents; track component.title) {
-    @if (component.type === ChangeDetectionType.DEFAULT) {
-        <default-component [title]="component.title"></default-component>
-    }
-    @else {
-        <onpush-component [title]="component.title"></onpush-component>
-    }
-}
+<p-organizationChart [value]="appComponents">
+    <ng-template let-node pTemplate="default">
+        @if (node.data.type === ChangeDetectionType.DEFAULT) {
+            <default-component [title]="node.data.title"></default-component>
+        } @else {
+            <onpush-component [title]="node.data.title"></onpush-component>
+        }
+    </ng-template>
+</p-organizationChart>
 
 <button (click)="handleAddComponent(ChangeDetectionType.DEFAULT)">Add Default component</button>
 <button (click)="handleAddComponent(ChangeDetectionType.ONPUSH)">Add Onpush component</button>
